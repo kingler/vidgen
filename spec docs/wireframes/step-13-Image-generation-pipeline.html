@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Generation Pipeline – Wireframe</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .block {
+      width: 220px;
+      height: 120px;
+      background: #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.85em;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+
+    .arrow {
+      width: 40px;
+      height: 2px;
+      background: #666;
+      margin: auto 0;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .note {
+      width: 200px;
+      height: 100px;
+      background: #eee;
+      border: 2px dashed #aaa;
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.75em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="pipeline">
+    <div class="block">Prompt Seed<br/>(per scene)</div>
+    <div class="arrow"></div>
+    <div class="block">Model Selector<br/>(Flux / OpenAI)</div>
+    <div class="arrow"></div>
+    <div class="block">Image Generation<br/>(Initial Frame)</div>
+    <div class="arrow"></div>
+    <div class="block">Iterative Frame Gen<br/>(Camera / Motion Prompts)</div>
+    <div class="arrow"></div>
+    <div class="block">ControlNet-like Model<br/>(Edits / Stylization)</div>
+    <div class="arrow"></div>
+    <div class="block">Rendered Scene<br/>(Canvas Output)</div>
+  </div>
+
+  <div class="flow" style="margin-top: 60px; justify-content: center;">
+    <div class="note">Feedback Strip:<br/>Constructing...<br/>Adjusting...<br/>Finalizing...</div>
+  </div>
+</body>
+</html>

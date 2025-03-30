@@ -1,0 +1,176 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Extended Key Frame Dependency Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .frame-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+    }
+
+    .frame {
+      background: #ddd;
+      width: 120px;
+      height: 80px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8em;
+      position: relative;
+    }
+
+    .frame.highlight {
+      border: 2px solid #007bff;
+    }
+
+    .deps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .dep-box {
+      background: #eee;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .dep-box strong {
+      font-size: 0.75em;
+      color: #444;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .editable {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 6px;
+      border-radius: 4px;
+      font-size: 0.8em;
+    }
+
+    .toggle {
+      font-size: 0.7em;
+      background: #ccc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .toggle.locked {
+      background: #999;
+    }
+
+    .player {
+      background: #ddd;
+      height: 100px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      background: #bbb;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Extended Key Frame Linkage Viewer</div>
+
+    <div class="frame-strip">
+      <div class="frame highlight">Frame 0</div>
+      <div class="frame">Frame 1</div>
+      <div class="frame">Frame 2</div>
+      <div class="frame">Frame 3</div>
+      <div class="frame">Frame 4</div>
+    </div>
+
+    <div class="deps">
+      <div class="dep-box">
+        <strong>Subject <span class="toggle locked">📌 Locked</span></strong>
+        <div class="editable">Alien pilot with neon visor</div>
+      </div>
+      <div class="dep-box">
+        <strong>Style <span class="toggle">🔄 Inherit</span></strong>
+        <div class="editable">Cyberpunk cityscape, rain soaked</div>
+      </div>
+      <div class="dep-box">
+        <strong>Pose <span class="toggle">🔄 Inherit</span></strong>
+        <div class="editable">Walking toward camera</div>
+      </div>
+      <div class="dep-box">
+        <strong>Lighting <span class="toggle">🔄 Inherit</span></strong>
+        <div class="editable">High contrast, colored glow</div>
+      </div>
+      <div class="dep-box">
+        <strong>Camera <span class="toggle">📌 Locked</span></strong>
+        <div class="editable">Low angle pan up</div>
+      </div>
+      <div class="dep-box">
+        <strong>Frame Notes</strong>
+        <div class="editable">Introduce light flicker in background signs</div>
+      </div>
+    </div>
+
+    <div class="header">🎥 Play-through Preview</div>
+    <div class="player">[ Animation Playback Preview ]</div>
+    <div class="controls">
+      <div class="btn">⏮️ Previous</div>
+      <div class="btn">▶️ Play</div>
+      <div class="btn">⏸ Pause</div>
+      <div class="btn">⏭️ Next</div>
+    </div>
+  </div>
+</body>
+</html>

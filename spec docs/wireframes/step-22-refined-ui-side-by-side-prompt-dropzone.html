@@ -1,0 +1,173 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Refined UI – Side-by-Side Prompt + Dropzone</title>
+  <style>
+    body {
+      margin: 0;
+      background: #efefef;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
+      height: 50px;
+      background: #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .preview {
+      height: 280px;
+      background: #999;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+      color: white;
+    }
+
+    .middle {
+      display: flex;
+      gap: 20px;
+    }
+
+    .prompt-box {
+      flex: 2;
+      background: #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 140px;
+      font-size: 0.9em;
+      color: #222;
+    }
+
+    .prompt-box[contenteditable]:empty:before {
+      content: "Describe or modify your scene prompt...";
+      color: #888;
+    }
+
+    .dropzone {
+      flex: 1;
+      background: #f8f8f8;
+      border: 2px dashed #777;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85em;
+      color: #444;
+      gap: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .image-slot {
+      height: 60px;
+      background: #ccc;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75em;
+      color: #333;
+      position: relative;
+    }
+
+    .tag-select {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: white;
+      font-size: 0.7em;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+    }
+
+    .actions {
+      height: 50px;
+      background: #bbb;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .timeline {
+      height: 90px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 15px;
+      overflow-x: auto;
+    }
+
+    .scene-thumb {
+      width: 80px;
+      height: 60px;
+      background: #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8em;
+      border: 1px solid #999;
+      border-radius: 4px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Scene 1: The Story Begins</div>
+
+    <div class="preview">[ Scene Preview ]</div>
+
+    <div class="middle">
+      <div class="prompt-box" contenteditable="true"></div>
+
+      <div class="dropzone">
+        Drag & drop up to 4 reference images
+        <div class="grid">
+          <div class="image-slot">IMG 1 <div class="tag-select">Style</div></div>
+          <div class="image-slot">IMG 2 <div class="tag-select">Subject</div></div>
+          <div class="image-slot">IMG 3 <div class="tag-select">Theme</div></div>
+          <div class="image-slot">IMG 4 <div class="tag-select">Style</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div>Edit</div>
+      <div>Regenerate</div>
+      <div>Continue</div>
+    </div>
+
+    <div class="timeline">
+      <div class="scene-thumb">Scene 1</div>
+      <div class="scene-thumb">+</div>
+    </div>
+  </div>
+</body>
+</html>

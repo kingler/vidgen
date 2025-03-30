@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Integrated Editor – Scene + Drop Zone</title>
+  <style>
+    body {
+      margin: 0;
+      background: #ececec;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      height: 50px;
+      background: #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .preview {
+      height: 300px;
+      background: #999;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+      color: white;
+    }
+
+    .dropzone {
+      height: 120px;
+      border: 2px dashed #777;
+      border-radius: 8px;
+      background: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 0.95em;
+    }
+
+    .actions {
+      height: 50px;
+      background: #bbb;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    .prompt-box {
+      background: #e0e0e0;
+      border-radius: 6px;
+      padding: 14px;
+      min-height: 90px;
+      font-size: 0.9em;
+      color: #222;
+    }
+
+    .prompt-box[contenteditable]:empty:before {
+      content: "Describe or modify your scene prompt...";
+      color: #888;
+    }
+
+    .timeline {
+      height: 90px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 15px;
+      overflow-x: auto;
+    }
+
+    .scene-thumb {
+      width: 80px;
+      height: 60px;
+      background: #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8em;
+      border: 1px solid #999;
+      border-radius: 4px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Scene 1: The Story Begins</div>
+
+    <div class="preview">[ Scene Preview Area ]</div>
+
+    <div class="dropzone">Drag & drop image references here</div>
+
+    <div class="actions">
+      <div>Edit</div>
+      <div>Regenerate</div>
+      <div>Continue</div>
+    </div>
+
+    <div class="prompt-box" contenteditable="true"></div>
+
+    <div class="timeline">
+      <div class="scene-thumb">Scene 1</div>
+      <div class="scene-thumb">+</div>
+    </div>
+  </div>
+</body>
+</html>

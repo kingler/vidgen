@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zoomed-In Scene Refinement Canvas</title>
+  <style>
+    body {
+      margin: 0;
+      background: #eee;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .canvas {
+      width: 1200px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .overlay {
+      position: sticky;
+      top: 0;
+      background: #f8f8f8;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .prompt-box, .controls {
+      padding: 10px;
+      background: #ddd;
+      border-radius: 6px;
+    }
+
+    .scene-strip {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      overflow-x: auto;
+    }
+
+    .scene-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.5;
+    }
+
+    .scene-block.active {
+      opacity: 1;
+    }
+
+    .shot-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .frame {
+      width: 120px;
+      height: 80px;
+      background: #bbb;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.75em;
+      color: #222;
+      border: 1px solid #888;
+    }
+
+    .frame.alt {
+      background: #ccc;
+    }
+
+    .frame.branch {
+      border: 2px dashed #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+
+    <div class="overlay">
+      <div class="prompt-box">Prompt: Alien enters the hangar, scanning the dark corners...</div>
+      <div class="controls">[ Edit ] [ Regenerate ] [ Add Branch ] [ Drag & Drop Zone ]</div>
+    </div>
+
+    <div class="scene-strip">
+      <div class="scene-block">
+        <div class="shot-stack">
+          <div class="frame">Scene 1 Shot A</div>
+          <div class="frame">Scene 1 Shot B</div>
+        </div>
+      </div>
+
+      <div class="scene-block active">
+        <div class="shot-stack">
+          <div class="frame">Scene 2 Shot A</div>
+          <div class="frame">Scene 2 Shot B</div>
+          <div class="frame">Scene 2 Shot C</div>
+          <div class="frame branch">Branch 1</div>
+        </div>
+      </div>
+
+      <div class="scene-block">
+        <div class="shot-stack">
+          <div class="frame">Scene 3 Shot A</div>
+          <div class="frame alt">Scene 3 Shot B</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

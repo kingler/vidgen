@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Infinite Canvas – Zoomed In Scene View</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .scene-editor {
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .scene-header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .preview-area {
+      height: 300px;
+      background: #999;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.1em;
+    }
+
+    .frame-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+    }
+
+    .frame-thumb {
+      width: 100px;
+      height: 70px;
+      background: #bbb;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8em;
+      color: #333;
+      border: 1px solid #888;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .toolbar .left,
+    .toolbar .right {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      background: #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #bbb;
+    }
+
+    .prompt-box {
+      background: #e0e0e0;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      min-height: 100px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene-editor">
+    <div class="scene-header">Scene 2: Conflict Unfolds</div>
+
+    <div class="preview-area">[ Scene Preview Playback ]</div>
+
+    <div class="toolbar">
+      <div class="left">
+        <div class="btn">← Prev</div>
+        <div class="btn">▶️ Play</div>
+        <div class="btn">Next →</div>
+      </div>
+      <div class="right">
+        <div class="btn">Regenerate Frame</div>
+        <div class="btn">Edit Prompt</div>
+      </div>
+    </div>
+
+    <div class="frame-strip">
+      <div class="frame-thumb">Frame 1</div>
+      <div class="frame-thumb">Frame 2</div>
+      <div class="frame-thumb">Frame 3</div>
+      <div class="frame-thumb">Frame 4</div>
+      <div class="frame-thumb">+</div>
+    </div>
+
+    <div class="prompt-box" contenteditable="true">Prompt: Alien pilot raises visor to scan horizon…</div>
+  </div>
+</body>
+</html>

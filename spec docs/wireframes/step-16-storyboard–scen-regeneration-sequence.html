@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Storyboard – Scene Regeneration Sequence</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .storyboard {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .step-title {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 14px;
+    }
+
+    .box {
+      background: #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 0.85em;
+      text-align: center;
+      color: #333;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .half {
+      flex: 1;
+      background: #eee;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: left;
+      font-size: 0.8em;
+      color: #444;
+    }
+
+    .feedback {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pulse-box {
+      flex: 1;
+      background: #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 0.75em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="storyboard">
+
+    <div class="step">
+      <div class="step-title">Step 1: User Right-Clicks a Scene → “Regenerate”</div>
+      <div class="box">Scene block contextual menu opens<br>“Regenerate Scene” selected</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 2: Prompt Comparison Modal</div>
+      <div class="row">
+        <div class="half">
+          <strong>Original:</strong><br>
+          “A melancholic jazz musician wanders neon-lit alleyways…”
+        </div>
+        <div class="half">
+          <strong>Edited:</strong><br>
+          “Now chasing a corporate conspiracy through fractured memories…”
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 3: Continuity Warning Appears</div>
+      <div class="box">⚠️ Potential contradiction with Scene 4 detected.<br>Prompt may break story arc alignment.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 4: User Clicks “Regenerate Scene”</div>
+      <div class="box">Regeneration triggered.<br>Agents begin processing.</div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 5: Agent Feedback Strip</div>
+      <div class="feedback">
+        <div class="pulse-box">🧠 Narrative Agent<br>Reconstructing plot…</div>
+        <div class="pulse-box">🎨 Image Gen Agent<br>Rendering frames…</div>
+        <div class="pulse-box">🕵️ Continuity Agent<br>Validating changes…</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">Step 6: Updated Scene Pushed to Timeline</div>
+      <div class="box">New scene version replaces old.<br>Visuals and timing updated in timeline view.</div>
+    </div>
+
+  </div>
+</body>
+</html>

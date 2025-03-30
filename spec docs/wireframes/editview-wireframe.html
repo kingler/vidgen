@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Movie Maker - Wireframe</title>
+  <style>
+    /* Basic reset and styling for gray boxes */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: #eee;
+      overflow: hidden; /* We’ll simulate an infinite canvas by letting a container scroll. */
+    }
+
+    /* Infinite Canvas Container */
+    .infinite-canvas {
+      position: relative;
+      width: 2000px; /* Arbitrary large width for demonstration */
+      height: 1200px; /* Arbitrary large height for demonstration */
+      background-color: #f0f0f0;
+      margin: 50px;
+      border: 2px dashed #aaa;
+      overflow: hidden;
+    }
+
+    /* Zoom & Pan Controls (placeholder) */
+    .canvas-controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ccc;
+      padding: 10px;
+      border: 1px solid #999;
+    }
+
+    /* Main Video Editor Container */
+    .video-editor-container {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 1200px;
+      height: 600px;
+      background-color: #ccc;
+      border: 2px solid #999;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* Video Preview Section */
+    .video-preview {
+      background-color: #999;
+      width: 70%;
+      height: 300px;
+      margin-bottom: 20px;
+      display: inline-block;
+      vertical-align: top;
+      border: 1px solid #666;
+    }
+
+    /* Drop Zone Section */
+    .dropzone {
+      background-color: #bbb;
+      width: 25%;
+      height: 300px;
+      margin-left: 5%;
+      display: inline-block;
+      vertical-align: top;
+      border: 2px dashed #666;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Timeline Container */
+    .timeline {
+      background-color: #999;
+      width: 100%;
+      height: 150px;
+      border: 1px solid #666;
+      margin-top: 20px;
+      overflow-x: auto;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    /* Individual Scene Blocks */
+    .scene-block {
+      display: inline-block;
+      width: 150px;
+      height: 100px;
+      background-color: #bbb;
+      margin: 10px;
+      border: 1px solid #666;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Simulating an infinite canvas using a large container -->
+  <div class="infinite-canvas">
+    <!-- Placeholder for zoom/pan controls -->
+    <div class="canvas-controls">
+      <p>Zoom & Pan Controls</p>
+    </div>
+
+    <!-- Main video editor container (zoomed in portion) -->
+    <div class="video-editor-container">
+      <!-- Video preview area -->
+      <div class="video-preview">
+        <p style="text-align:center; margin-top:120px;">Video Preview</p>
+      </div>
+
+      <!-- Drop zone for text files or images -->
+      <div class="dropzone">
+        <p>Drag & Drop Files Here</p>
+      </div>
+
+      <!-- Timeline area with scene blocks -->
+      <div class="timeline">
+        <div class="scene-block">Scene 1</div>
+        <div class="scene-block">Scene 2</div>
+        <div class="scene-block">Scene 3</div>
+        <div class="scene-block">Scene 4</div>
+        <!-- Additional scene blocks as needed -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inline Prompt Editing UI</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f6f6f6;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85em;
+      color: #555;
+    }
+
+    .editor-box {
+      background: #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 100px;
+      color: #222;
+      font-size: 0.9em;
+      line-height: 1.5;
+      outline: none;
+    }
+
+    .editor-box[contenteditable]:empty:before {
+      content: "Type your prompt here...";
+      color: #888;
+    }
+
+    .toolbar .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      background: #ccc;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Inline Prompt Editing</div>
+
+    <div class="toolbar">
+      <div class="buttons">
+        <div class="button">Undo</div>
+        <div class="button">AI Assist</div>
+      </div>
+      <div class="status">Last updated: 2 seconds ago</div>
+    </div>
+
+    <div class="editor-box" contenteditable="true"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Zoomed-In Scene with Adjacent & Alternate Previews</title>
+  <style>
+    body {
+      margin: 0;
+      background: #ddd;
+      font-family: sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Subtle grid background to convey infinite canvas */
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 150px 600px 150px; /* Left, Center, Right */
+      grid-template-rows: 100px 400px 100px;     /* Top, Middle, Bottom */
+      gap: 200px;
+    }
+
+    /* Each cell represents a partial or full scene preview */
+    .cell {
+      background: #f2f2f2;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      font-size: 0.85em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Center cell: main, zoomed-in scene */
+    .center-cell {
+      background: #999;
+      color: white;
+      font-size: 1em;
+    }
+
+    /* Overlays for actions or info on the center cell */
+    .toolbar {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.5);
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: flex;
+      gap: 12px;
+      color: #fff;
+      font-size: 0.8em;
+    }
+
+    .cell:hover {
+      cursor: pointer;
+      background: #e6e6e6;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <!-- Top-left cell is empty or a partial corner preview, if needed -->
+    <div class="cell" style="grid-column: 1; grid-row: 1; opacity: 0.3;">
+      (Corner)
+    </div>
+
+    <!-- Top-center: Alternate/branch version above the main scene -->
+    <div class="cell" style="grid-column: 2; grid-row: 1;">
+      Alt Scene Above
+    </div>
+
+    <!-- Top-right cell is empty or a partial corner preview, if needed -->
+    <div class="cell" style="grid-column: 3; grid-row: 1; opacity: 0.3;">
+      (Corner)
+    </div>
+
+    <!-- Middle-left: previous scene partial preview -->
+    <div class="cell" style="grid-column: 1; grid-row: 2;">
+      Prev Scene
+    </div>
+
+    <!-- Center: main, zoomed-in scene -->
+    <div class="cell center-cell" style="grid-column: 1 / 3; grid-row: 2;">
+      Main Scene Preview
+      <div class="toolbar">
+        <div>Edit</div>
+        <div>Regenerate</div>
+        <div>Continue</div>
+      </div>
+    </div>
+
+    <!-- Middle-right: next scene partial preview -->
+    <div class="cell" style="grid-column: 3; grid-row: 2;">
+      Next Scene
+    </div>
+
+    <!-- Bottom-left cell is empty or a partial corner preview, if needed -->
+    <div class="cell" style="grid-column: 1; grid-row: 3; opacity: 0.3;">
+      (Corner)
+    </div>
+
+    <!-- Bottom-center: Alternate/branch version below the main scene -->
+    <div class="cell" style="grid-column: 2; grid-row: 3;">
+      Alt Scene Below
+    </div>
+
+    <!-- Bottom-right cell is empty or a partial corner preview, if needed -->
+    <div class="cell" style="grid-column: 3; grid-row: 3; opacity: 0.3;">
+      (Corner)
+    </div>
+  </div>
+</body>
+</html>

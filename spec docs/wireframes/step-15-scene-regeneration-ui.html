@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe – Scene Regeneration UI</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f7f7f7;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .prompt-comparison {
+      display: flex;
+      gap: 20px;
+    }
+
+    .prompt-box {
+      flex: 1;
+      background: #eee;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      height: 120px;
+      overflow-y: auto;
+    }
+
+    .label {
+      font-weight: bold;
+      font-size: 0.8em;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .check-summary {
+      background: #f0f0f0;
+      border-left: 5px solid #ffc107;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      color: #555;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .dismiss {
+      background: #ccc;
+      color: #333;
+    }
+
+    .regenerate {
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Scene Regeneration Panel</div>
+
+    <div class="prompt-comparison">
+      <div class="prompt-box">
+        <div class="label">Original Prompt</div>
+        “A melancholic jazz musician wanders neon-lit alleyways after losing his only memory link…”
+      </div>
+      <div class="prompt-box">
+        <div class="label">Edited Prompt</div>
+        “The same musician now chases a corporate conspiracy through memory loops and fractured visions…”
+      </div>
+    </div>
+
+    <div class="check-summary">
+      ⚠️ Continuity Check: This scene may reference knowledge introduced in a later scene.<br />
+      Consider regenerating to preserve narrative consistency.
+    </div>
+
+    <div class="actions">
+      <button class="btn dismiss">Dismiss Warning</button>
+      <button class="btn regenerate">Regenerate Scene</button>
+    </div>
+  </div>
+</body>
+</html>

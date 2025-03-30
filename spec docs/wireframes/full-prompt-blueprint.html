@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scene Editor – Updated Layout</title>
+  <style>
+    body { margin: 0; background: #eee; font-family: sans-serif; }
+    .container {
+      width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      padding: 40px;
+      gap: 20px;
+    }
+
+    .header {
+      height: 50px; width: 100%;
+      background: #aaa;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: bold;
+    }
+
+    .scene-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .preview {
+      flex: 2;
+      background: #999;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; color: white;
+      height: 60%;
+    }
+
+    .actions {
+      height: 50px;
+      background: #bbb;
+      display: flex; align-items: center; justify-content: space-around;
+      color: #333;
+    }
+
+    .prompt-box {
+      height: 120px;
+      background: #ccc;
+      display: flex; align-items: center; justify-content: center;
+      color: #333;
+    }
+
+    .timeline {
+      height: 100px; width: 100%;
+      background: #ddd;
+      display: flex; align-items: center;
+      padding: 0 20px;
+      gap: 15px;
+      overflow-x: auto;
+    }
+
+    .scene-thumb {
+      width: 80px; height: 60px;
+      background: #bbb;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8em;
+      color: #444;
+      border: 1px solid #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Scene 1: The Story Begins</div>
+
+    <div class="scene-area">
+      <div class="preview">[ Scene Preview ]</div>
+
+      <div class="actions">
+        <div>Edit</div>
+        <div>Regenerate</div>
+        <div>Continue</div>
+      </div>
+
+      <div class="prompt-box">Prompt: “It was a stormy night...”</div>
+    </div>
+
+    <div class="timeline">
+      <div class="scene-thumb">Scene 1</div>
+      <div class="scene-thumb">+</div>
+    </div>
+  </div>
+</body>
+</html>

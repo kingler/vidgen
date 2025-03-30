@@ -1,0 +1,42 @@
+# Architecture Diagram
+
+![Architecture Diagram](architecture-diagram.png)
+
+```mermaid
+graph TD
+    subgraph User
+        A[User's Story Input]
+    end
+    subgraph Agents
+        B[Story Analysis Agent] --> C[Scene Generation Agent]
+        C --> D[Image Enhancement Agent]
+        D --> E[Character Consistency Agent]
+        E --> F[Stitching & Animation Agent]
+    end
+    A --> B
+    F --> |Final Movie|Output[Final Movie]
+    Output --> User
+```
+
+## Architecture Diagram - detailed version:
+
+```mermaid
+graph TD
+    subgraph User
+        A[User's Story Input]
+    end
+    subgraph Agents
+        B[Story Analysis Agent] --> C[Scene Generation Agent]
+        C --> D[Image Enhancement Agent]
+        D --> E[Character Consistency Agent]
+        E --> F[Stitching & Animation Agent]
+        F --> |Final Movie|Output[Final Movie]
+    end
+    subgraph Feedback
+        G[User Feedback] --> H[Reinforcement Learning]
+        H --> B & C & D & E & F
+    end
+    A --> B
+    Output --> G
+    Output --> User
+```

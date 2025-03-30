@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Movie Maker - Wireframe with Canvas Preview</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #eee;
+      overflow: hidden;
+    }
+    /* Infinite Canvas Container */
+    .infinite-canvas {
+      position: relative;
+      width: 2000px; /* Large area to simulate infinite space */
+      height: 1200px;
+      background-color: #f0f0f0;
+      margin: 50px;
+      border: 2px dashed #aaa;
+      overflow: hidden;
+    }
+    /* Zoom & Pan Controls (placeholder) */
+    .canvas-controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ccc;
+      padding: 10px;
+      border: 1px solid #999;
+    }
+    /* Main Video Editor Container */
+    .video-editor-container {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 1200px;
+      height: 600px;
+      background-color: #ccc;
+      border: 2px solid #999;
+      padding: 20px;
+      overflow: hidden;
+    }
+    /* Video Preview (Canvas) */
+    .video-preview {
+      display: inline-block;
+      width: 70%;
+      height: 300px;
+      margin-bottom: 20px;
+      vertical-align: top;
+      border: 1px solid #666;
+      background-color: #999;
+      text-align: center;
+    }
+    /* Drop Zone Section */
+    .dropzone {
+      background-color: #bbb;
+      width: 25%;
+      height: 300px;
+      margin-left: 5%;
+      display: inline-block;
+      vertical-align: top;
+      border: 2px dashed #666;
+      text-align: center;
+      padding: 10px;
+    }
+    /* Timeline Container */
+    .timeline {
+      background-color: #999;
+      width: 100%;
+      height: 150px;
+      border: 1px solid #666;
+      margin-top: 20px;
+      overflow-x: auto;
+      white-space: nowrap;
+      position: relative;
+    }
+    /* Individual Scene Blocks */
+    .scene-block {
+      display: inline-block;
+      width: 150px;
+      height: 100px;
+      background-color: #bbb;
+      margin: 10px;
+      border: 1px solid #666;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Simulating an infinite canvas -->
+  <div class="infinite-canvas">
+    <!-- Placeholder for zoom/pan controls -->
+    <div class="canvas-controls">
+      <p>Zoom &amp; Pan Controls</p>
+    </div>
+
+    <!-- Main video editor container -->
+    <div class="video-editor-container">
+      <!-- Video preview area with a canvas -->
+      <div class="video-preview">
+        <canvas id="previewCanvas" width="700" height="300" style="background-color:#444;"></canvas>
+      </div>
+
+      <!-- Drop zone for text files or images -->
+      <div class="dropzone">
+        <p>Drag &amp; Drop Files Here</p>
+      </div>
+
+      <!-- Timeline area with scene blocks -->
+      <div class="timeline">
+        <div class="scene-block">Scene 1</div>
+        <div class="scene-block">Scene 2</div>
+        <div class="scene-block">Scene 3</div>
+        <div class="scene-block">Scene 4</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple placeholder drawing on the preview canvas
+    const canvas = document.getElementById('previewCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Draw a placeholder rectangle
+    ctx.fillStyle = '#888';
+    ctx.fillRect(50, 50, 200, 100);
+
+    // Add some text to simulate a "Preview" label
+    ctx.fillStyle = '#fff';
+    ctx.font = '20px sans-serif';
+    ctx.fillText('Preview', 80, 110);
+  </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Movie Maker - Canvas UI Preview Feature</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #eee;
+      overflow: hidden;
+    }
+    /* Infinite Canvas Container */
+    .infinite-canvas {
+      position: relative;
+      width: 2000px; /* Large area simulating an infinite canvas */
+      height: 1200px;
+      background-color: #f0f0f0;
+      margin: 50px;
+      border: 2px dashed #aaa;
+    }
+    /* Zoom & Pan Controls (placeholder) */
+    .canvas-controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #ccc;
+      padding: 10px;
+      border: 1px solid #999;
+    }
+    /* Main Video Editor Container */
+    .video-editor-container {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 1200px;
+      height: 600px;
+      background-color: #ccc;
+      border: 2px solid #999;
+      padding: 20px;
+      overflow: hidden;
+    }
+    /* Video Preview Section containing the canvas */
+    .video-preview {
+      display: inline-block;
+      width: 70%;
+      height: 300px;
+      margin-bottom: 20px;
+      vertical-align: top;
+      border: 1px solid #666;
+      background-color: #999;
+    }
+    /* Drop Zone Section */
+    .dropzone {
+      background-color: #bbb;
+      width: 25%;
+      height: 300px;
+      margin-left: 5%;
+      display: inline-block;
+      vertical-align: top;
+      border: 2px dashed #666;
+      text-align: center;
+      padding: 10px;
+    }
+    /* Timeline Container */
+    .timeline {
+      background-color: #999;
+      width: 100%;
+      height: 150px;
+      border: 1px solid #666;
+      margin-top: 20px;
+      overflow-x: auto;
+      white-space: nowrap;
+      position: relative;
+    }
+    /* Individual Scene Blocks */
+    .scene-block {
+      display: inline-block;
+      width: 150px;
+      height: 100px;
+      background-color: #bbb;
+      margin: 10px;
+      border: 1px solid #666;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+      color: #333;
+    }
+    /* Button for simulating preview updates */
+    .update-button {
+      display: block;
+      margin: 10px auto;
+      padding: 5px 10px;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Infinite Canvas Container -->
+  <div class="infinite-canvas">
+    <!-- Zoom & Pan Controls (placeholder) -->
+    <div class="canvas-controls">
+      <p>Zoom &amp; Pan Controls</p>
+    </div>
+
+    <!-- Main Video Editor Container -->
+    <div class="video-editor-container">
+      <!-- Video Preview Area with a Canvas for live preview -->
+      <div class="video-preview">
+        <canvas id="previewCanvas" width="700" height="300" style="background-color:#444;"></canvas>
+      </div>
+
+      <!-- Button to simulate a preview update (interactive feature) -->
+      <button class="update-button" onclick="updatePreview()">Update Preview</button>
+
+      <!-- Drop Zone for text files or images -->
+      <div class="dropzone">
+        <p>Drag &amp; Drop Files Here</p>
+      </div>
+
+      <!-- Timeline Area with Scene Blocks -->
+      <div class="timeline">
+        <div class="scene-block">Scene 1</div>
+        <div class="scene-block">Scene 2</div>
+        <div class="scene-block">Scene 3</div>
+        <div class="scene-block">Scene 4</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize the canvas context for the preview
+    const canvas = document.getElementById('previewCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Function to draw the initial preview graphic
+    function drawInitialPreview() {
+      ctx.fillStyle = '#888';
+      ctx.fillRect(50, 50, 200, 100);
+      ctx.fillStyle = '#fff';
+      ctx.font = '20px sans-serif';
+      ctx.fillText('Preview', 80, 110);
+    }
+
+    // Function to simulate an interactive update to the preview
+    function updatePreview() {
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw a new graphic element (e.g., a circle) to indicate change
+      ctx.fillStyle = '#555';
+      ctx.beginPath();
+      ctx.arc(350, 150, 50, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.font = '18px sans-serif';
+      ctx.fillText('Updated!', 310, 155);
+    }
+
+    // Draw the initial preview on load
+    drawInitialPreview();
+  </script>
+</body>
+</html>

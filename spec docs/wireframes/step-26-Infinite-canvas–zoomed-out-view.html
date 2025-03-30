@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Infinite Canvas – Zoomed Out View</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f0f0f0;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .canvas {
+      width: 2000px;
+      height: 1000px;
+      background: #fff;
+      border: 2px dashed #ccc;
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+    }
+
+    .story-block {
+      position: absolute;
+      background: #fdfdfd;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      padding: 16px;
+      width: 400px;
+    }
+
+    .story-header {
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .shot-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .scene-grid {
+      display: flex;
+      gap: 6px;
+    }
+
+    .scene-thumb {
+      width: 40px;
+      height: 30px;
+      background: #bbb;
+      border-radius: 4px;
+      font-size: 0.6em;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="story-block" style="top: 40px; left: 40px;">
+      <div class="story-header">Story A</div>
+      <div class="shot-strip">
+        <div class="scene-grid">
+          <div class="scene-thumb">S1-F1</div>
+          <div class="scene-thumb">S1-F2</div>
+          <div class="scene-thumb">S1-F3</div>
+        </div>
+        <div class="scene-grid">
+          <div class="scene-thumb">S2-F1</div>
+          <div class="scene-thumb">S2-F2</div>
+        </div>
+        <div class="scene-grid">
+          <div class="scene-thumb">S3-F1</div>
+          <div class="scene-thumb">S3-F2</div>
+          <div class="scene-thumb">S3-F3</div>
+          <div class="scene-thumb">S3-F4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-block" style="top: 40px; left: 520px;">
+      <div class="story-header">Story B</div>
+      <div class="shot-strip">
+        <div class="scene-grid">
+          <div class="scene-thumb">S1-F1</div>
+          <div class="scene-thumb">S1-F2</div>
+        </div>
+        <div class="scene-grid">
+          <div class="scene-thumb">S2-F1</div>
+          <div class="scene-thumb">S2-F2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-block" style="top: 40px; left: 1000px;">
+      <div class="story-header">+ Add Story</div>
+    </div>
+  </div>
+</body>
+</html>

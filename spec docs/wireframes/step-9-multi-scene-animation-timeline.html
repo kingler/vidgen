@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe – Multi-Scene Animation Timeline</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .timeline-header {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .timeline-track {
+      background: #ddd;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .scene-block {
+      width: 180px;
+      height: 100px;
+      background: white;
+      border-radius: 8px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 0.8em;
+    }
+
+    .scene-time {
+      font-size: 0.7em;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .snap-marker {
+      width: 2px;
+      height: 100px;
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="timeline-header">Multi-Scene Animation Timeline</div>
+  <div class="timeline-track">
+    <div class="scene-block">
+      Scene 1
+      <div class="scene-time">0s - 6s</div>
+    </div>
+    <div class="snap-marker"></div>
+    <div class="scene-block">
+      Scene 2
+      <div class="scene-time">6s - 14s</div>
+    </div>
+    <div class="snap-marker"></div>
+    <div class="scene-block">
+      Scene 3
+      <div class="scene-time">14s - 22s</div>
+    </div>
+    <div class="snap-marker"></div>
+    <div class="scene-block">
+      Scene 4
+      <div class="scene-time">22s - 29s</div>
+    </div>
+  </div>
+</body>
+</html>

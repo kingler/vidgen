@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe – ControlNet Scripting + Behavior Panel</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .section {
+      display: flex;
+      gap: 20px;
+    }
+
+    .panel {
+      flex: 1;
+      background: #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.85em;
+      color: #444;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .code-box {
+      flex: 1;
+      background: #eee;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.8em;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">ControlNet Behavior + Scripting Panel</div>
+
+    <div class="section">
+      <div class="panel">Control Type<br>Pose | Depth | Edge</div>
+      <div class="panel">Input Image Preview<br>Reference / Mask</div>
+      <div class="panel">Prompt Refinement Box<br>Optional override text</div>
+    </div>
+
+    <div class="section">
+      <div class="panel">Pose Keypoint Overlay<br>Visual Target Editor</div>
+      <div class="panel">Camera Path<br>Motion Sketch Timeline</div>
+    </div>
+
+    <div class="section">
+      <div class="code-box">
+        frame[0]:<br>
+        &nbsp;&nbsp;camera: pan_right(5deg)<br>
+        &nbsp;&nbsp;pose: left_arm_raise<br><br>
+        frame[1]:<br>
+        &nbsp;&nbsp;camera: hold<br>
+        &nbsp;&nbsp;pose: left_arm_hold_position
+      </div>
+    </div>
+  </div>
+</body>
+</html>

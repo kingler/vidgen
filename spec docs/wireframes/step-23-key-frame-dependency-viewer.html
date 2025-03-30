@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Key Frame Dependency Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .frame-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+    }
+
+    .frame {
+      background: #ddd;
+      width: 120px;
+      height: 80px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8em;
+      position: relative;
+    }
+
+    .frame.highlight {
+      border: 2px solid #007bff;
+    }
+
+    .deps {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .dep-box {
+      background: #eee;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dep-box strong {
+      font-size: 0.75em;
+      color: #444;
+    }
+
+    .editable {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 6px;
+      border-radius: 4px;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Key Frame Linkage Viewer</div>
+
+    <div class="frame-strip">
+      <div class="frame highlight">Frame 0</div>
+      <div class="frame">Frame 1</div>
+      <div class="frame">Frame 2</div>
+      <div class="frame">Frame 3</div>
+      <div class="frame">Frame 4</div>
+    </div>
+
+    <div class="deps">
+      <div class="dep-box">
+        <strong>Subject</strong>
+        <div class="editable">Alien pilot with neon visor</div>
+      </div>
+      <div class="dep-box">
+        <strong>Style</strong>
+        <div class="editable">Cyberpunk cityscape, rain soaked</div>
+      </div>
+      <div class="dep-box">
+        <strong>Pose</strong>
+        <div class="editable">Walking toward camera</div>
+      </div>
+      <div class="dep-box">
+        <strong>Lighting</strong>
+        <div class="editable">High contrast, colored glow</div>
+      </div>
+      <div class="dep-box">
+        <strong>Camera</strong>
+        <div class="editable">Low angle pan up</div>
+      </div>
+      <div class="dep-box">
+        <strong>Frame Notes</strong>
+        <div class="editable">Introduce light flicker in background signs</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

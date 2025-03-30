@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Frame Diff Overlay</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .diff-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .diff-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+    }
+
+    .label {
+      flex: 1;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .before, .after {
+      flex: 2;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .before {
+      background: #ffecec;
+      color: #a33;
+    }
+
+    .after {
+      background: #e6ffed;
+      color: #2a6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Frame Diff Viewer – Changes from Frame 1 ➜ Frame 2</div>
+
+    <div class="diff-section">
+      <div class="diff-row">
+        <div class="label">Subject</div>
+        <div class="before">Alien pilot with neon visor</div>
+        <div class="after">Alien pilot with cracked visor</div>
+      </div>
+
+      <div class="diff-row">
+        <div class="label">Pose</div>
+        <div class="before">Walking toward camera</div>
+        <div class="after">Raises hand toward viewer</div>
+      </div>
+
+      <div class="diff-row">
+        <div class="label">Lighting</div>
+        <div class="before">Static neon glow</div>
+        <div class="after">Flickering pink sign</div>
+      </div>
+
+      <div class="diff-row">
+        <div class="label">Camera</div>
+        <div class="before">Low angle</div>
+        <div class="after">Low angle (unchanged)</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

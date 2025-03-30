@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe – Animated Output Preview Panel</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f6f6f6;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .preview-panel {
+      background: #ddd;
+      height: 300px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      color: #444;
+    }
+
+    .timeline {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+    }
+
+    .frame-thumb {
+      width: 100px;
+      height: 60px;
+      background: #bbb;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.75em;
+      color: white;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .btn {
+      background: #444;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">Animated Output Preview</div>
+
+    <div class="preview-panel">
+      [Video Canvas Placeholder – Playing Animation Frames]
+    </div>
+
+    <div class="timeline">
+      <div class="frame-thumb">F0</div>
+      <div class="frame-thumb">F1</div>
+      <div class="frame-thumb">F2</div>
+      <div class="frame-thumb">F3</div>
+      <div class="frame-thumb">F4</div>
+      <div class="frame-thumb">F5</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn">⏮️ Back</button>
+      <button class="btn">▶️ Play</button>
+      <button class="btn">⏸ Pause</button>
+      <button class="btn">🔁 Regenerate</button>
+    </div>
+  </div>
+</body>
+</html>

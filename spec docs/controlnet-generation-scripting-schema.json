@@ -1,0 +1,26 @@
+{
+    "frame_index": 0,
+    "prompt": "A futuristic alleyway with blinking neon signs",
+    "camera": {
+      "motion": "pan_right",
+      "angle_degrees": 5,
+      "zoom": 1.0
+    },
+    "pose": {
+      "subject": "main_character",
+      "action": "raise_left_arm"
+    },
+    "style": {
+      "lighting": "cinematic",
+      "color_grade": "cool"
+    },
+    "control_net": {
+      "enabled": true,
+      "type": "pose",
+      "mask": "mask_001.png",
+      "weight": 1.0
+    },
+    "reference_image": "scene001_ref.jpg",
+    "dependencies": ["frame_000"],
+    "notes": "Maintain continuity of rain animation"
+  }

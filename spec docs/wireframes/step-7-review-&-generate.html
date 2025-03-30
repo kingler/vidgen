@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 7 - Review & Generate</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .step-container {
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
+      width: 500px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .step-header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .final-prompt {
+      background: #eee;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      line-height: 1.5;
+      color: #333;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+
+    .nav-btns {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      background: #444;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85em;
+      cursor: pointer;
+    }
+
+    .edit-hint {
+      font-size: 0.8em;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="step-container">
+    <div class="step-header">Your story blueprint is ready.</div>
+
+    <div class="final-prompt">
+      Genre: gritty 1960s sci-fi noir<br />
+      Setting: Tokyo, year 2074, flooded streets<br />
+      Protagonist: a washed-up cybernetic jazz musician with a secret<br />
+      Conflict: a mega-corp that controls time through memory implants<br />
+      Theme: moral decay in a world where time is currency<br />
+      Visual Style: Ghibli-Style (reference image uploaded)
+    </div>
+
+    <div class="edit-hint">You can go back to update any section before generating your scenes.</div>
+
+    <div class="nav-btns">
+      <button class="btn">Back</button>
+      <button class="btn">Generate Story</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 6 - Visual Style + Prompt Preview</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f4f4f4;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .step-container {
+      background: white;
+      border-radius: 10px;
+      padding: 40px;
+      width: 440px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 75px;
+    }
+
+    .step-header {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .style-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+    }
+
+    .pill {
+      background: #ddd;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background 0.2s;
+    }
+
+    .pill:hover {
+      background: #bbb;
+    }
+
+    .dropzone {
+      border: 2px dashed #bbb;
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      border-radius: 8px;
+      background: #f9f9f9;
+      font-size: 0.9em;
+    }
+
+    .prompt-preview {
+      background: #eee;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85em;
+      line-height: 1.4;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .nav-btns {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      background: #444;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85em;
+      cursor: pointer;
+    }
+
+    .hint {
+      font-size: 0.8em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="step-container">
+    <div class="step-header">Choose a visual style or upload a reference image</div>
+
+    <div class="style-options">
+      <div class="pill">Film Noir</div>
+      <div class="pill">Ghibli-Style</div>
+      <div class="pill">Cyberpunk</div>
+      <div class="pill">Pixel Art</div>
+      <div class="pill">Photorealistic</div>
+      <div class="pill">Comic Book</div>
+    </div>
+
+    <div class="dropzone">
+      Drag & drop a reference image here<br />
+      (character design, setting, or moodboard)
+    </div>
+
+    <div class="prompt-preview">
+      <strong>Prompt so far:</strong><br />
+      Genre: gritty 1960s sci-fi noir<br />
+      Setting: Tokyo, year 2074, flooded streets<br />
+      Protagonist: a washed-up cybernetic jazz musician with a secret<br />
+      Conflict: a mega-corp that controls time through memory implants<br />
+      Theme: moral decay in a world where time is currency<br />
+      Visual Style: Ghibli-Style (reference image uploaded)
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn">Back</button>
+      <button class="btn">Next</button>
+    </div>
+  </div>
+</body>
+</html>

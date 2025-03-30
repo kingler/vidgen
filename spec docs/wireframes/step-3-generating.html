@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 3 - Generating</title>
+  <style>
+    body { margin: 0; background: #eee; font-family: sans-serif; }
+    .container {
+      width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 30px;
+    }
+    .status-box {
+      width: 300px; height: 60px;
+      background: #aaa;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: bold; font-size: 1.2em;
+    }
+    .loading-bar {
+      width: 60%; height: 12px;
+      background: #ccc;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    .loading-fill {
+      width: 40%; height: 100%;
+      background: #999;
+      animation: loading 2s infinite ease-in-out;
+    }
+    @keyframes loading {
+      0% { margin-left: -40%; }
+      50% { margin-left: 100%; }
+      100% { margin-left: -40%; }
+    }
+    .tip {
+      color: #666;
+      font-size: 0.9em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="status-box">Generating your first scene...</div>
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
+    </div>
+    <div class="tip">Tip: You can edit, rearrange, or re-prompt once the scene is ready.</div>
+  </div>
+</body>
+</html>
