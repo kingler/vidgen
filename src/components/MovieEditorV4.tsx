@@ -66,11 +66,21 @@ const Scene: React.FC<SceneProps> = ({ scene, isCurrentScene, isGenerating = fal
       }`}
       style={{
         gridColumn: `${scene.chapter}`,
-        gridRow: `${scene.sceneNumber}`
+        gridRow: `${scene.sceneNumber}`,
+        width: '1200px', 
+        height: '700px',
+        borderRadius: '10px',
+        boxShadow: isCurrentScene 
+          ? '0 0 10px rgba(255, 204, 0, 0.3)' 
+          : '0 4px 8px rgba(0, 0, 0, 0.1)',
       }}
       onClick={onClick}
     >
-      <div className="w-full h-full flex items-center justify-center text-white relative">
+      <div className="w-full h-full flex items-center justify-center text-white relative" 
+        style={{ 
+          borderRadius: '10px', 
+          overflow: 'hidden' 
+        }}>
         <div className="absolute top-0 left-0 w-full bg-black/50 text-xs text-center py-1">
           {scene.id}
         </div>
@@ -1299,7 +1309,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
   };
 
   return (
-    <div className="fixed inset-0 flex bg-white" style={{ zIndex: 100 }}>
+    <div className="fixed inset-0 flex bg-white" style={{ zIndex: 100, overflow: 'visible' }}>
       {/* Fixed Left Sidebar */}
       <nav className="w-12 flex flex-col items-center py-4 space-y-6 z-10"
         style={{
@@ -1334,7 +1344,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
             {canvasView.zoomMode === 'focused' && (
               <div className="absolute top-0 left-0 w-full z-10 text-white text-center py-3 font-medium"
                 style={{
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderBottom: 'none',
                   backgroundColor: 'transparent',
                   color: 'rgba(255, 255, 255, 0.7)'
                 }}>
@@ -1362,11 +1372,12 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
                   gridTemplateRows: 'repeat(3, 1fr)',
-                  gap: 'var(--scene-gap)',
+                  gap: 'var(--scene-gap, 100px)',
                   transform: `scale(${canvasView.scale}) translate(${canvasView.translateX}px, ${canvasView.translateY}px)`,
                   transformOrigin: 'center center',
                   transition: canvasView.transition,
                   willChange: 'transform',
+                  overflow: 'visible'
                 }}
               >
                 {/* Grid overlay for zoomed-out view */}

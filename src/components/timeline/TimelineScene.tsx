@@ -50,9 +50,11 @@ export const TimelineScene: React.FC<TimelineSceneProps> = ({
       className="relative h-16 w-24 flex-shrink-0 cursor-pointer flex items-center justify-center group rounded-md overflow-hidden"
       style={{
         background: 'black',
-        borderRadius: '0.375rem',
+        borderRadius: '10px',
         border: isActive ? '2px solid #FFCC00' : '1px solid rgba(0, 0, 0, 0.2)',
-        boxShadow: isActive ? '0 0 10px rgba(255, 204, 0, 0.3)' : 'none'
+        boxShadow: isActive 
+          ? '0 0 10px rgba(255, 204, 0, 0.3)' 
+          : '0 2px 4px rgba(0, 0, 0, 0.1)'
       }}
       onClick={onClick}
       draggable={draggable}

@@ -8,6 +8,7 @@ interface AnimatedBackgroundProps {
   backgroundUrl?: string; // Optional URL for background image or GIF
   fallbackGradient?: string; // Optional fallback gradient if image fails to load
   vignetteIntensity?: 'light' | 'medium' | 'heavy'; // Control darkness of vignette
+  fullHeight?: boolean; // Optional full height flag
 }
 
 export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
@@ -15,6 +16,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   backgroundUrl = '/backgrounds/default-movie-set.gif', // Default background
   fallbackGradient,
   vignetteIntensity = 'medium',
+  fullHeight = true,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [actualBackground, setActualBackground] = useState<string>(backgroundUrl);
@@ -68,7 +70,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   }, [actualBackground, isImageBackground]);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className={`relative ${fullHeight ? 'h-screen' : 'min-h-0'}`} style={{ overflow: 'visible' }}>
       {/* Background Image/Video */}
       <div 
         className={`absolute inset-0 transition-opacity duration-1000 ${

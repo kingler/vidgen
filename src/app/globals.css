@@ -92,7 +92,7 @@
   --scene-background: black;
   --scene-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
   --scene-transition: all 300ms ease-out;
-  --scene-vertical-offset: 550px;
+  --scene-vertical-offset: 350px;
   
   /* Canvas Settings */
   --canvas-bg: #F7F7F9;
@@ -118,6 +118,10 @@
   --transition-fast: 200ms;
   --transition-normal: 300ms;
   --transition-slow: 500ms;
+  
+  /* Add or update these CSS variables for scene dimensions and spacing */
+  --editor-scene-width: 1200px;
+  --editor-scene-height: 700px;
 }
 
 .dark {
