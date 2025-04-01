@@ -1,0 +1,126 @@
+/**
+ * VidGen Theme Variables
+ * A centralized location for all theme-related CSS variables
+ */
+
+:root {
+  /* ===================
+   * BRAND COLORS
+   * =================== */
+  --vidgen-accent-color: #FFCC00;
+  --vidgen-accent-color-rgb: 255, 204, 0;
+  --vidgen-accent-color-dark: #E6B800;
+  --vidgen-accent-color-light: #FFDB4D;
+  --vidgen-accent-color-ghost: rgba(255, 204, 0, 0.2);
+  
+  /* ===================
+   * SCENE COMPONENTS
+   * =================== */
+  --scene-width: 1200px;
+  --scene-height: 700px;
+  --scene-gap: 100px;
+  --scene-border-radius: 0.5rem;
+  --scene-background: black;
+  --scene-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
+  --scene-transition: all 300ms ease-out;
+  --scene-vertical-offset: 550px;
+  
+  /* Scene Image Container */
+  --scene-image-border: 1px solid rgba(255, 255, 255, 0.1);
+  --scene-image-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  
+  /* Scene Info Container */
+  --scene-info-bg: rgba(0, 0, 0, 0.7);
+  --scene-info-text: rgba(255, 255, 255, 0.9);
+  --scene-info-padding: 0.75rem;
+  
+  /* ===================
+   * CHAPTER STYLING
+   * =================== */
+  --chapter-number-size: 120px;
+  --chapter-number-font-size: 5rem;
+  --chapter-number-color: rgba(255, 204, 0, 0.7);
+  --chapter-number-text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+  --chapter-title-color: #FFFFFF;
+  --chapter-title-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* ===================
+   * CANVAS SETTINGS
+   * =================== */
+  --canvas-bg: #F7F7F9;
+  --canvas-grid-color: #CCCCCC;
+  --canvas-grid-size: 10px;
+  
+  /* ===================
+   * PROMPT BOX
+   * =================== */
+  --prompt-bg: rgba(15, 23, 42, 0.8);
+  --prompt-border: 1px solid rgba(255, 255, 255, 0.1);
+  --prompt-text: rgba(255, 255, 255, 0.9);
+  --prompt-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --prompt-radius: 0.5rem;
+  --prompt-padding: 1rem;
+  --prompt-font-size: 0.9rem;
+  --prompt-line-height: 1.5;
+  
+  /* ===================
+   * CONTROLS PANEL
+   * =================== */
+  --controls-max-width: 900px;
+  --controls-bg: white;
+  --controls-border-radius: 10px 10px 0 0;
+  --controls-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --controls-bottom-position: 50px;
+  
+  /* ===================
+   * BUTTON STYLES
+   * =================== */
+  --button-primary-bg: black;
+  --button-primary-text: white;
+  --button-secondary-bg: white;
+  --button-secondary-text: black;
+  --button-inactive-bg: #f3f4f6;
+  --button-inactive-text: #6b7280;
+  
+  /* Button Hover States */
+  --button-primary-hover-bg: #333333;
+  --button-secondary-hover-bg: #f9f9f9;
+  --button-hover-transition: background-color 0.2s ease;
+  
+  /* ===================
+   * ANIMATION DURATIONS
+   * =================== */
+  --transition-fast: 200ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  
+  /* ===================
+   * TIMELINE COMPONENT
+   * =================== */
+  --timeline-height: 120px;
+  --timeline-item-width: 96px;
+  --timeline-item-height: 64px;
+  --timeline-gap: 12px;
+  --timeline-bg: rgba(15, 23, 42, 0.7);
+  --timeline-border: 1px solid rgba(255, 255, 255, 0.1);
+  --timeline-item-border: 1px solid rgba(0, 0, 0, 0.2);
+  --timeline-item-active-border: 2px solid var(--vidgen-accent-color);
+  --timeline-item-hover-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+/* Dark Mode Overrides */
+.dark {
+  --canvas-bg: #111827;
+  --canvas-grid-color: rgba(255, 255, 255, 0.1);
+  
+  --button-primary-bg: var(--vidgen-accent-color);
+  --button-primary-text: black;
+  --button-inactive-bg: rgba(255, 255, 255, 0.1);
+  --button-inactive-text: rgba(255, 255, 255, 0.6);
+  
+  --controls-bg: #1f2937;
+  --controls-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  --prompt-bg: rgba(31, 41, 55, 0.9);
+  --chapter-number-color: rgba(255, 204, 0, 0.5);
+} 

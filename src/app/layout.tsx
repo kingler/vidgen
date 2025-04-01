@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import '@/components/styles/vidgen-theme.css'
+import '@/components/styles/vidgen-components.css'
 import { OnboardingProvider } from '@/contexts/OnboardingContext';
+import { NavBar } from '@/components/ui/NavBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <OnboardingProvider>
-          {children}
+          <NavBar />
+          <main className="pb-8">
+            {children}
+          </main>
         </OnboardingProvider>
       </body>
     </html>
