@@ -1189,14 +1189,10 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
 
         {/* Fixed Timeline - Only shows current chapter - with slide-up animation */}
         <div
-          className={`h-24 overflow-x-auto z-10 transition-all duration-500 ease-in-out ${
+          className={`h-24 overflow-x-auto z-10 transition-all duration-500 ease-in-out timeline ${
             uiAnimation.timelineVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}
-          style={{
-            background: 'white',
-            borderTop: 'none',
-            boxShadow: '0 -2px 10px rgba(0, 0, 0, 0.03)'
-          }}>
+        >
           <div className="flex h-full items-center px-4 space-x-4">
             {/* Current Chapter Timeline */}
             <div key={currentChapter.id} className="h-full flex flex-col">

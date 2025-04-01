@@ -99,10 +99,14 @@
 }
 
 /* ===================
+ * EDITOR CONTAINER LAYOUT
+ * =================== */
+/* ===================
  * CONTROLS PANEL
  * =================== */
 .controls-panel {
   max-width: var(--controls-max-width);
+  width: var(--controls-width);
   background: var(--controls-bg);
   border-radius: var(--controls-border-radius);
   box-shadow: var(--controls-shadow);
@@ -110,7 +114,46 @@
   bottom: var(--controls-bottom-position);
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20;
+  z-index: 9;
+}
+
+/* ===================
+ * TIMELINE COMPONENT
+ * =================== */
+.timeline {
+  height: var(--timeline-height);
+  background: var(--timeline-bg);
+  border-top: var(--timeline-border);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  gap: var(--timeline-gap);
+  overflow-x: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.timeline-item {
+  width: var(--timeline-item-width);
+  height: var(--timeline-item-height);
+  background: black;
+  border-radius: 0.375rem;
+  border: var(--timeline-item-border);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.timeline-item:hover {
+  box-shadow: var(--timeline-item-hover-shadow);
+}
+
+.timeline-item.active {
+  border: var(--timeline-item-active-border);
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
 }
 
 /* ===================
@@ -151,38 +194,4 @@
 .btn-mode.active {
   background-color: var(--button-primary-bg);
   color: var(--button-primary-text);
-}
-
-/* ===================
- * TIMELINE COMPONENT
- * =================== */
-.timeline {
-  height: var(--timeline-height);
-  background: var(--timeline-bg);
-  border-top: var(--timeline-border);
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  gap: var(--timeline-gap);
-  overflow-x: auto;
-}
-
-.timeline-item {
-  width: var(--timeline-item-width);
-  height: var(--timeline-item-height);
-  background: black;
-  border-radius: 0.375rem;
-  border: var(--timeline-item-border);
-  transition: all var(--transition-fast);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-.timeline-item:hover {
-  box-shadow: var(--timeline-item-hover-shadow);
-}
-
-.timeline-item.active {
-  border: var(--timeline-item-active-border);
-  box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
 } 

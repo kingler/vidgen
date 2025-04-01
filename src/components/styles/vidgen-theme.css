@@ -66,11 +66,13 @@
   /* ===================
    * CONTROLS PANEL
    * =================== */
-  --controls-max-width: 900px;
+  --controls-max-width: 1100px;
+  --controls-width: 900px;
   --controls-bg: white;
   --controls-border-radius: 10px 10px 0 0;
   --controls-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --controls-bottom-position: 50px;
+  --controls-bottom-position: 120px;
+  --controls-margin-bottom: 150px; /* Space between controls and timeline */
   
   /* ===================
    * BUTTON STYLES
@@ -101,7 +103,7 @@
   --timeline-item-width: 96px;
   --timeline-item-height: 64px;
   --timeline-gap: 12px;
-  --timeline-bg: rgba(15, 23, 42, 0.7);
+  --timeline-bg: rgba(255, 255, 255, 1);
   --timeline-border: 1px solid rgba(255, 255, 255, 0.1);
   --timeline-item-border: 1px solid rgba(0, 0, 0, 0.2);
   --timeline-item-active-border: 2px solid var(--vidgen-accent-color);
