@@ -55,21 +55,21 @@ export const SceneAddButtons: React.FC<SceneAddButtonsProps> = ({
     }
   };
 
-  const buttonClass = "opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer";
+  const buttonClass = "opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer hover:scale-110 transform";
   let containerClass = "";
   let title = "";
   
   switch (type) {
     case 'between-scenes':
-      containerClass = "absolute left-1/2 transform -translate-x-1/2 h-12 flex items-center justify-center w-full z-10";
+      containerClass = "absolute top-[-12px] left-1/2 transform -translate-x-1/2 flex items-center justify-center z-30 w-8 h-8";
       title = "Add scene between";
       break;
     case 'end-of-chapter':
-      containerClass = "absolute bottom-0 left-1/2 transform -translate-x-1/2 h-12 flex items-center justify-center w-full z-10";
+      containerClass = "absolute bottom-0 left-1/2 transform -translate-x-1/2 h-12 flex items-center justify-center w-full z-30";
       title = "Add scene to chapter";
       break;
     case 'between-chapters':
-      containerClass = "absolute top-1/2 transform -translate-y-1/2 w-16 flex items-center justify-center h-full z-10";
+      containerClass = "absolute top-1/2 transform -translate-y-1/2 w-16 flex items-center justify-center h-full z-30";
       title = "Add new chapter";
       break;
   }
@@ -77,7 +77,7 @@ export const SceneAddButtons: React.FC<SceneAddButtonsProps> = ({
   return (
     <div className={containerClass}>
       <button
-        className={`${buttonClass} bg-black/80 hover:bg-black text-white rounded-full p-2`}
+        className={`${buttonClass} bg-black/80 hover:bg-black text-white rounded-full p-2 shadow-md hover:shadow-lg`}
         onClick={handleClick}
         title={title}
       >

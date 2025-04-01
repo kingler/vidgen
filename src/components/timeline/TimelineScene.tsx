@@ -47,7 +47,7 @@ export const TimelineScene: React.FC<TimelineSceneProps> = ({
 
   return (
     <div
-      className="relative h-16 w-24 flex-shrink-0 cursor-pointer flex items-center justify-center group"
+      className="relative h-16 w-24 flex-shrink-0 cursor-pointer flex items-center justify-center group rounded-md overflow-hidden"
       style={{
         background: 'black',
         borderRadius: '0.375rem',
@@ -70,16 +70,16 @@ export const TimelineScene: React.FC<TimelineSceneProps> = ({
       ) : null}
       
       {/* Scene title */}
-      <span className="text-xs text-white z-10">{title}</span>
+      <span className="text-xs text-white z-10 px-1 text-center">{title}</span>
       
-      {/* Delete button */}
+      {/* Delete button - improved visibility */}
       {onDelete && (
         <button
-          className="absolute top-1 right-1 bg-black/60 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity z-20"
+          className="absolute top-1 right-1 bg-red-600 hover:bg-red-700 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-20 transform hover:scale-110"
           onClick={handleDelete}
           title="Delete scene"
         >
-          <X size={12} />
+          <X size={14} strokeWidth={2.5} />
         </button>
       )}
     </div>

@@ -311,6 +311,9 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
     }
   ];
 
+  // Add a state to manage chapters
+  const [chaptersList, setChaptersList] = useState(chapters);
+
   // Navigation icons for slim sidebar
   const navIcons = [
     {
@@ -511,7 +514,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
           imgContainer.appendChild(img);
           
           // Also update the scene in the chapters array for persistence
-          const updatedChapters = [...chapters];
+          const updatedChapters = [...chaptersList];
           for (const chapter of updatedChapters) {
             for (const scene of chapter.scenes) {
               if (scene.id === sceneId) {
@@ -617,7 +620,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
     
     // Find the scene object to get its prompt
     let prompt = currentScene.prompt;
-    for (const chapter of chapters) {
+    for (const chapter of chaptersList) {
       const scene = chapter.scenes.find(s => s.id === `scene-${currentScene.chapter}-${currentScene.sceneNumber}`);
       if (scene) {
         prompt = scene.prompt;
@@ -919,7 +922,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
   
   // Get current chapter based on current scene id
   const getCurrentChapter = () => {
-    return chapters.find(c => c.id === `chapter-${currentScene.chapter}`) || chapters[0];
+    return chaptersList.find(c => c.id === `chapter-${currentScene.chapter}`) || chaptersList[0];
   };
 
   const currentChapter = getCurrentChapter();
@@ -967,153 +970,184 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
 
   // Add functions for scene management
   const addSceneToChapter = (chapterId: string) => {
-    // Find chapter
-    const chapter = chapters.find(c => c.id === chapterId);
-    if (!chapter) return;
-    
-    // Get the chapter position from the id (chapter-1 -> 1)
-    const chapterPosition = parseInt(chapter.id.split('-')[1]);
-    
-    // Generate a new scene ID
-    const newSceneNumber = chapter.scenes.length + 1;
-    const newSceneId = `scene-${chapterPosition}-${newSceneNumber}`;
-    
-    // Create a new scene
-    const newScene = {
-      id: newSceneId,
-      title: `Scene ${newSceneNumber}`,
-      chapter: chapterPosition,
-      sceneNumber: newSceneNumber,
-      prompt: "A new scene. Add your description here...",
-      imageUrl: ""
-    };
-    
-    // Add the scene to the chapter
-    chapter.scenes.push(newScene);
-    
-    // Focus on the new scene
-    focusOnScene(newSceneId, newScene.prompt, chapterPosition, newSceneNumber);
+    setChaptersList(prevChapters => {
+      const updatedChapters = [...prevChapters];
+      // Find chapter
+      const chapter = updatedChapters.find(c => c.id === chapterId);
+      if (!chapter) return prevChapters;
+      
+      // Get the chapter position from the id (chapter-1 -> 1)
+      const chapterPosition = parseInt(chapter.id.split('-')[1]);
+      
+      // Generate a new scene ID
+      const newSceneNumber = chapter.scenes.length + 1;
+      const newSceneId = `scene-${chapterPosition}-${newSceneNumber}`;
+      
+      // Create a new scene
+      const newScene = {
+        id: newSceneId,
+        title: `Scene ${newSceneNumber}`,
+        chapter: chapterPosition,
+        sceneNumber: newSceneNumber,
+        prompt: "A new scene. Add your description here...",
+        imageUrl: ""
+      };
+      
+      // Add the scene to the chapter
+      chapter.scenes.push(newScene);
+      
+      // Set timeout to focus on the new scene after state update
+      setTimeout(() => {
+        focusOnScene(newSceneId, newScene.prompt, chapterPosition, newSceneNumber);
+      }, 0);
+      
+      return updatedChapters;
+    });
   };
 
   // Function to add a scene between two existing scenes
   const addSceneBetween = (sceneBeforeId: string, sceneAfterId: string) => {
-    // Find the scenes and their chapter
-    let chapterWithScenes: Chapter | null = null;
-    for (const chapter of chapters) {
-      if (chapter.scenes.some(s => s.id === sceneBeforeId)) {
-        chapterWithScenes = chapter;
-        break;
+    console.log(`Adding scene between ${sceneBeforeId} and ${sceneAfterId}`);
+    
+    setChaptersList(prevChapters => {
+      const updatedChapters = [...prevChapters];
+      // Find the scenes and their chapter
+      let chapterWithScenes: Chapter | null = null;
+      for (const chapter of updatedChapters) {
+        if (chapter.scenes.some(s => s.id === sceneBeforeId)) {
+          chapterWithScenes = chapter;
+          break;
+        }
       }
-    }
-    
-    if (!chapterWithScenes) return;
-    
-    // Extract scene indices
-    const beforeIndex = chapterWithScenes.scenes.findIndex(s => s.id === sceneBeforeId);
-    const afterIndex = chapterWithScenes.scenes.findIndex(s => s.id === sceneAfterId);
-    
-    if (beforeIndex < 0 || afterIndex < 0) return;
-    
-    // Generate a new scene ID - use fractional scene numbers temporarily
-    // Later we'll renumber all scenes
-    const [, chapterStr, sceneStrBefore] = sceneBeforeId.split('-');
-    const [, ] = sceneAfterId.split('-'); // We only need the chapter info from the after scene
-    
-    const chapterNum = parseInt(chapterStr);
-    const sceneNumBefore = parseInt(sceneStrBefore);
-    
-    // Create the new scene (we'll renumber when saving)
-    const newSceneNumber = sceneNumBefore + 0.5; // Temporary fractional number
-    const newSceneId = `scene-${chapterNum}-${newSceneNumber}`;
-    
-    const newScene: Scene = {
-      id: newSceneId,
-      title: `Scene ${newSceneNumber}`,
-      chapter: chapterNum,
-      sceneNumber: newSceneNumber,
-      prompt: "A new scene added between scenes. Add your description here...",
-      imageUrl: ""
-    };
-    
-    // Add the new scene after the 'before' scene
-    chapterWithScenes.scenes.splice(beforeIndex + 1, 0, newScene);
-    
-    // Renumber all scenes in the chapter to be sequential
-    chapterWithScenes.scenes = chapterWithScenes.scenes.map((scene: Scene, index: number) => {
-      const [prefix, chapterStr] = scene.id.split('-');
-      const newId = `${prefix}-${chapterStr}-${index + 1}`;
       
-      return {
-        ...scene,
-        id: newId,
-        title: `Scene ${index + 1}`,
-        sceneNumber: index + 1
+      if (!chapterWithScenes) return prevChapters;
+      
+      // Extract scene indices
+      const beforeIndex = chapterWithScenes.scenes.findIndex(s => s.id === sceneBeforeId);
+      const afterIndex = chapterWithScenes.scenes.findIndex(s => s.id === sceneAfterId);
+      
+      if (beforeIndex < 0 || afterIndex < 0) return prevChapters;
+      
+      // Generate a new scene ID - use fractional scene numbers temporarily
+      // Later we'll renumber all scenes
+      const [, chapterStr, sceneStrBefore] = sceneBeforeId.split('-');
+      const [, ] = sceneAfterId.split('-'); // We only need the chapter info from the after scene
+      
+      const chapterNum = parseInt(chapterStr);
+      const sceneNumBefore = parseInt(sceneStrBefore);
+      
+      // Create the new scene (we'll renumber when saving)
+      const newSceneNumber = sceneNumBefore + 0.5; // Temporary fractional number
+      const newSceneId = `scene-${chapterNum}-${newSceneNumber}`;
+      
+      const newScene: Scene = {
+        id: newSceneId,
+        title: `Scene ${newSceneNumber}`,
+        chapter: chapterNum,
+        sceneNumber: newSceneNumber,
+        prompt: "A new scene added between scenes. Add your description here...",
+        imageUrl: ""
       };
+      
+      // Add the new scene after the 'before' scene
+      chapterWithScenes.scenes.splice(beforeIndex + 1, 0, newScene);
+      
+      // Renumber all scenes in the chapter to be sequential
+      chapterWithScenes.scenes = chapterWithScenes.scenes.map((scene: Scene, index: number) => {
+        const [prefix, chapterStr] = scene.id.split('-');
+        const newId = `${prefix}-${chapterStr}-${index + 1}`;
+        
+        return {
+          ...scene,
+          id: newId,
+          title: `Scene ${index + 1}`,
+          sceneNumber: index + 1
+        };
+      });
+      
+      // Set timeout to focus on the new scene after state update
+      setTimeout(() => {
+        focusOnScene(newScene.id, newScene.prompt, chapterNum, newSceneNumber);
+      }, 0);
+      
+      return updatedChapters;
     });
-    
-    // Focus on the new scene
-    focusOnScene(newScene.id, newScene.prompt, chapterNum, newSceneNumber);
   };
 
   // Function to delete a scene
   const deleteScene = (sceneId: string) => {
-    // Find the chapter containing the scene
-    let chapterWithScene: Chapter | null = null;
-    for (const chapter of chapters) {
-      if (chapter.scenes.some(s => s.id === sceneId)) {
-        chapterWithScene = chapter;
-        break;
+    console.log(`Deleting scene ${sceneId}`);
+    
+    setChaptersList(prevChapters => {
+      const updatedChapters = [...prevChapters];
+      // Find the chapter containing the scene
+      let chapterWithScene: Chapter | null = null;
+      let chapterIndex = -1;
+      
+      for (let i = 0; i < updatedChapters.length; i++) {
+        if (updatedChapters[i].scenes.some(s => s.id === sceneId)) {
+          chapterWithScene = updatedChapters[i];
+          chapterIndex = i;
+          break;
+        }
       }
-    }
-    
-    if (!chapterWithScene) return;
-    
-    // Get the scene index
-    const sceneIndex = chapterWithScene.scenes.findIndex(s => s.id === sceneId);
-    if (sceneIndex < 0) return;
-    
-    // Delete the scene
-    chapterWithScene.scenes.splice(sceneIndex, 1);
-    
-    // Renumber all scenes in the chapter
-    chapterWithScene.scenes = chapterWithScene.scenes.map((scene: Scene, index: number) => {
-      const [prefix, chapterStr] = scene.id.split('-');
-      const newId = `${prefix}-${chapterStr}-${index + 1}`;
       
-      return {
-        ...scene,
-        id: newId,
-        title: `Scene ${index + 1}`,
-        sceneNumber: index + 1
-      };
-    });
-    
-    // Focus on another scene if available
-    if (chapterWithScene.scenes.length > 0) {
-      const nextScene = chapterWithScene.scenes[Math.min(sceneIndex, chapterWithScene.scenes.length - 1)];
-      const [, chapterStr, sceneStr] = nextScene.id.split('-');
+      if (!chapterWithScene || chapterIndex < 0) return prevChapters;
       
-      focusOnScene(
-        nextScene.id,
-        nextScene.prompt,
-        parseInt(chapterStr),
-        parseInt(sceneStr)
-      );
-    } else if (chapters.length > 0) {
-      // Focus on first scene of first chapter
-      const firstChapter = chapters[0];
-      const firstScene = firstChapter.scenes[0];
-      if (firstScene) {
-        const [, chapterStr, sceneStr] = firstScene.id.split('-');
+      // Get the scene index
+      const sceneIndex = chapterWithScene.scenes.findIndex(s => s.id === sceneId);
+      if (sceneIndex < 0) return prevChapters;
+      
+      // Save the next scene to focus on
+      let nextSceneId = '';
+      let nextScenePrompt = '';
+      let nextChapterNum = 0;
+      let nextSceneNum = 0;
+      
+      if (chapterWithScene.scenes.length > 1) {
+        // If this chapter has more scenes, focus on the next one
+        const nextScene = chapterWithScene.scenes[Math.min(sceneIndex + 1, chapterWithScene.scenes.length - 1)];
+        const [, chapterStr, sceneStr] = nextScene.id.split('-');
+        nextSceneId = nextScene.id;
+        nextScenePrompt = nextScene.prompt;
+        nextChapterNum = parseInt(chapterStr);
+        nextSceneNum = parseInt(sceneStr);
+      } else if (updatedChapters.length > 1) {
+        // If this was the last scene in the chapter, focus on a scene in another chapter
+        const nextChapter = updatedChapters[Math.max(0, chapterIndex - 1)];
+        const nextScene = nextChapter.scenes[0];
+        const [, chapterStr, sceneStr] = nextScene.id.split('-');
+        nextSceneId = nextScene.id;
+        nextScenePrompt = nextScene.prompt;
+        nextChapterNum = parseInt(chapterStr);
+        nextSceneNum = parseInt(sceneStr);
+      }
+      
+      // Delete the scene
+      chapterWithScene.scenes.splice(sceneIndex, 1);
+      
+      // Renumber all scenes in the chapter
+      chapterWithScene.scenes = chapterWithScene.scenes.map((scene: Scene, index: number) => {
+        const [prefix, chapterStr] = scene.id.split('-');
+        const newId = `${prefix}-${chapterStr}-${index + 1}`;
         
-        focusOnScene(
-          firstScene.id,
-          firstScene.prompt,
-          parseInt(chapterStr),
-          parseInt(sceneStr)
-        );
+        return {
+          ...scene,
+          id: newId,
+          title: `Scene ${index + 1}`,
+          sceneNumber: index + 1
+        };
+      });
+      
+      // Focus on another scene if we found one
+      if (nextSceneId) {
+        setTimeout(() => {
+          focusOnScene(nextSceneId, nextScenePrompt, nextChapterNum, nextSceneNum);
+        }, 0);
       }
-    }
+      
+      return updatedChapters;
+    });
   };
 
   // Handle scene reordering via drag and drop
@@ -1133,88 +1167,135 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
     const draggedSceneId = e.dataTransfer.getData('scene-id');
     if (draggedSceneId === targetSceneId) return;
     
-    // Find the chapters and scenes involved
-    let sourceChapter: Chapter | null = null;
-    let targetChapter: Chapter | null = null;
-    let sourceSceneIndex = -1;
-    let targetSceneIndex = -1;
-    
-    for (const chapter of chapters) {
-      const sourceIndex = chapter.scenes.findIndex(s => s.id === draggedSceneId);
-      const targetIndex = chapter.scenes.findIndex(s => s.id === targetSceneId);
+    setChaptersList(prevChapters => {
+      const updatedChapters = [...prevChapters];
+      // Find the chapters and scenes involved
+      let sourceChapter: Chapter | null = null;
+      let targetChapter: Chapter | null = null;
+      let sourceSceneIndex = -1;
+      let targetSceneIndex = -1;
       
-      if (sourceIndex >= 0) {
-        sourceChapter = chapter;
-        sourceSceneIndex = sourceIndex;
+      for (const chapter of updatedChapters) {
+        const sourceIndex = chapter.scenes.findIndex(s => s.id === draggedSceneId);
+        const targetIndex = chapter.scenes.findIndex(s => s.id === targetSceneId);
+        
+        if (sourceIndex >= 0) {
+          sourceChapter = chapter;
+          sourceSceneIndex = sourceIndex;
+        }
+        
+        if (targetIndex >= 0) {
+          targetChapter = chapter;
+          targetSceneIndex = targetIndex;
+        }
+        
+        if (sourceChapter && targetChapter) break;
       }
       
-      if (targetIndex >= 0) {
-        targetChapter = chapter;
-        targetSceneIndex = targetIndex;
+      if (!sourceChapter || !targetChapter || sourceSceneIndex < 0 || targetSceneIndex < 0) 
+        return prevChapters;
+      
+      // If same chapter, just reorder
+      if (sourceChapter.id === targetChapter.id) {
+        const scenes = [...sourceChapter.scenes];
+        const [movedScene] = scenes.splice(sourceSceneIndex, 1);
+        scenes.splice(targetSceneIndex, 0, movedScene);
+        
+        // Update scene IDs and titles to maintain sequence
+        sourceChapter.scenes = scenes.map((scene: Scene, index: number) => {
+          const [prefix, chapterStr] = scene.id.split('-');
+          const newId = `${prefix}-${chapterStr}-${index + 1}`;
+          
+          return {
+            ...scene,
+            id: newId,
+            title: `Scene ${index + 1}`,
+            sceneNumber: index + 1
+          };
+        });
+      } else {
+        // Moving between chapters
+        const sourceScenes = [...sourceChapter.scenes];
+        const targetScenes = [...targetChapter.scenes];
+        
+        // Remove from source
+        const [movedScene] = sourceScenes.splice(sourceSceneIndex, 1);
+        
+        // Add to target
+        targetScenes.splice(targetSceneIndex, 0, movedScene);
+        
+        // Update scene IDs in source chapter
+        sourceChapter.scenes = sourceScenes.map((scene: Scene, index: number) => {
+          const [prefix, chapterStr] = scene.id.split('-');
+          const newId = `${prefix}-${chapterStr}-${index + 1}`;
+          
+          return {
+            ...scene,
+            id: newId,
+            title: `Scene ${index + 1}`,
+            sceneNumber: index + 1
+          };
+        });
+        
+        // Update scene IDs in target chapter
+        targetChapter.scenes = targetScenes.map((scene: Scene, index: number) => {
+          // Extract chapter number from the target chapter
+          const targetChapterNum = targetChapter.id.split('-')[1];
+          const newId = `scene-${targetChapterNum}-${index + 1}`;
+          
+          return {
+            ...scene,
+            id: newId,
+            title: `Scene ${index + 1}`,
+            chapter: parseInt(targetChapterNum),
+            sceneNumber: index + 1
+          };
+        });
       }
       
-      if (sourceChapter && targetChapter) break;
-    }
-    
-    if (!sourceChapter || !targetChapter || sourceSceneIndex < 0 || targetSceneIndex < 0) return;
-    
-    // If same chapter, just reorder
-    if (sourceChapter.id === targetChapter.id) {
-      const scenes = [...sourceChapter.scenes];
-      const [movedScene] = scenes.splice(sourceSceneIndex, 1);
-      scenes.splice(targetSceneIndex, 0, movedScene);
+      return updatedChapters;
+    });
+  };
+
+  // Add a function to add a new chapter
+  const addChapter = () => {
+    setChaptersList(prevChapters => {
+      const updatedChapters = [...prevChapters];
+      // Generate new chapter ID
+      const newChapterPosition = updatedChapters.length + 1;
+      const newChapterId = `chapter-${newChapterPosition}`;
       
-      // Update scene IDs and titles to maintain sequence
-      sourceChapter.scenes = scenes.map((scene: Scene, index: number) => {
-        const [prefix, chapterStr] = scene.id.split('-');
-        const newId = `${prefix}-${chapterStr}-${index + 1}`;
-        
-        return {
-          ...scene,
-          id: newId,
-          title: `Scene ${index + 1}`,
-          sceneNumber: index + 1
-        };
-      });
-    } else {
-      // Moving between chapters
-      const sourceScenes = [...sourceChapter.scenes];
-      const targetScenes = [...targetChapter.scenes];
+      // Create new chapter with an initial scene
+      const newChapter: Chapter = {
+        id: newChapterId,
+        title: `Chapter ${newChapterPosition}`,
+        scenes: [
+          {
+            id: `scene-${newChapterPosition}-1`,
+            title: `Scene 1`,
+            chapter: newChapterPosition,
+            sceneNumber: 1,
+            prompt: "First scene of a new chapter. Add your description here...",
+            imageUrl: ""
+          }
+        ]
+      };
       
-      // Remove from source
-      const [movedScene] = sourceScenes.splice(sourceSceneIndex, 1);
+      // Add the chapter
+      updatedChapters.push(newChapter);
       
-      // Add to target
-      targetScenes.splice(targetSceneIndex, 0, movedScene);
+      // Focus on the first scene of the new chapter
+      setTimeout(() => {
+        focusOnScene(
+          `scene-${newChapterPosition}-1`,
+          "First scene of a new chapter. Add your description here...",
+          newChapterPosition,
+          1
+        );
+      }, 0);
       
-      // Update scene IDs in source chapter
-      sourceChapter.scenes = sourceScenes.map((scene: Scene, index: number) => {
-        const [prefix, chapterStr] = scene.id.split('-');
-        const newId = `${prefix}-${chapterStr}-${index + 1}`;
-        
-        return {
-          ...scene,
-          id: newId,
-          title: `Scene ${index + 1}`,
-          sceneNumber: index + 1
-        };
-      });
-      
-      // Update scene IDs in target chapter
-      targetChapter.scenes = targetScenes.map((scene: Scene, index: number) => {
-        // Extract chapter number from the target chapter
-        const targetChapterNum = targetChapter.id.split('-')[1];
-        const newId = `scene-${targetChapterNum}-${index + 1}`;
-        
-        return {
-          ...scene,
-          id: newId,
-          title: `Scene ${index + 1}`,
-          chapter: parseInt(targetChapterNum),
-          sceneNumber: index + 1
-        };
-      });
-    }
+      return updatedChapters;
+    });
   };
 
   return (
@@ -1298,7 +1379,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
                 )}
               
                 {/* Render all chapters and scenes in their grid positions */}
-                {chapters.map(chapter => (
+                {chaptersList.map(chapter => (
                   chapter.scenes.map(scene => (
                     <Scene
                       key={scene.id}
@@ -1484,53 +1565,48 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
               <div className="text-xs text-gray-600 mb-1 font-medium">{currentChapter.title}</div>
               
               {/* Scene Thumbnails - with staggered animations */}
-              <div className="flex space-x-2 relative group">
+              <div className="flex space-x-4 relative group">
                 {currentChapter.scenes.map((scene, _index) => {
                   // Extract scene number for comparison
                   const sceneNum = parseInt(scene.id.split('-')[2]);
                   
                   return (
-                    <TimelineScene
-                      key={scene.id}
-                      id={scene.id}
-                      title={scene.title}
-                      imageUrl={scene.imageUrl}
-                      isActive={currentScene.sceneNumber === sceneNum}
-                      onClick={() => {
-                        const [, chapterStr, sceneStr] = scene.id.split('-');
-                        
-                        // Use the focusOnScene function
-                        focusOnScene(
-                          scene.id,
-                          scene.prompt,
-                          parseInt(chapterStr),
-                          parseInt(sceneStr)
-                        );
-                      }}
-                      onDelete={() => deleteScene(scene.id)}
-                      draggable={true}
-                      onDragStart={(e) => handleSceneDragStart(e, scene.id)}
-                      onDragOver={handleSceneDragOver}
-                      onDrop={(e) => handleSceneDrop(e, scene.id)}
-                    />
+                    <div key={scene.id} className="relative">
+                      <TimelineScene
+                        id={scene.id}
+                        title={scene.title}
+                        imageUrl={scene.imageUrl}
+                        isActive={currentScene.sceneNumber === sceneNum}
+                        onClick={() => {
+                          const [, chapterStr, sceneStr] = scene.id.split('-');
+                          
+                          // Use the focusOnScene function
+                          focusOnScene(
+                            scene.id,
+                            scene.prompt,
+                            parseInt(chapterStr),
+                            parseInt(sceneStr)
+                          );
+                        }}
+                        onDelete={() => deleteScene(scene.id)}
+                        draggable={true}
+                        onDragStart={(e) => handleSceneDragStart(e, scene.id)}
+                        onDragOver={handleSceneDragOver}
+                        onDrop={(e) => handleSceneDrop(e, scene.id)}
+                      />
+                      
+                      {/* Add button after each scene except the last one */}
+                      {_index < currentChapter.scenes.length - 1 && (
+                        <SceneAddButtons
+                          type="between-scenes"
+                          sceneBeforeId={scene.id}
+                          sceneAfterId={currentChapter.scenes[_index + 1].id}
+                          onAddBetweenScenes={addSceneBetween}
+                        />
+                      )}
+                    </div>
                   );
                 })}
-                
-                {/* Add buttons between scenes */}
-                {currentChapter.scenes.length > 1 && 
-                  currentChapter.scenes.slice(0, -1).map((scene, _index) => {
-                    const nextScene = currentChapter.scenes[_index + 1];
-                    return (
-                      <SceneAddButtons
-                        key={`add-between-${scene.id}-${nextScene.id}`}
-                        type="between-scenes"
-                        sceneBeforeId={scene.id}
-                        sceneAfterId={nextScene.id}
-                        onAddBetweenScenes={addSceneBetween}
-                      />
-                    );
-                  })
-                }
                 
                 {/* Add Scene Button - at end of chapter */}
                 <div
@@ -1557,9 +1633,9 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
                     className="h-10 w-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
                     onClick={() => {
                       // Find prev chapter
-                      const currentIndex = chapters.findIndex(c => c.id === currentChapter.id);
+                      const currentIndex = chaptersList.findIndex(c => c.id === currentChapter.id);
                       if (currentIndex > 0) {
-                        const prevChapter = chapters[currentIndex - 1];
+                        const prevChapter = chaptersList[currentIndex - 1];
                         const firstScene = prevChapter.scenes[0];
                         const [, chapterStr, sceneStr] = firstScene.id.split('-');
                         
@@ -1584,9 +1660,9 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
                     className="h-10 w-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors"
                     onClick={() => {
                       // Find next chapter
-                      const currentIndex = chapters.findIndex(c => c.id === currentChapter.id);
-                      if (currentIndex < chapters.length - 1) {
-                        const nextChapter = chapters[currentIndex + 1];
+                      const currentIndex = chaptersList.findIndex(c => c.id === currentChapter.id);
+                      if (currentIndex < chaptersList.length - 1) {
+                        const nextChapter = chaptersList[currentIndex + 1];
                         const firstScene = nextChapter.scenes[0];
                         const [, chapterStr, sceneStr] = firstScene.id.split('-');
                         
@@ -1637,7 +1713,7 @@ export default function MovieEditorV4({ enhanced = false }: MovieEditorV4Props) 
         <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-white text-black text-xs px-5 py-3 rounded-xl z-50 shadow-lg flex gap-4">
           <button 
             className="flex items-center gap-2 hover:text-yellow-500"
-            onClick={() => console.log('Add Chapter')}
+            onClick={addChapter}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
