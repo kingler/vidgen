@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { X } from 'lucide-react';
 
 export interface SceneProps {
   id: string;
@@ -11,11 +12,16 @@ export interface SceneProps {
   position?: { x: number; y: number };
   onEdit?: (id: string, prompt: string) => void;
   onRegenerate?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  draggable?: boolean;
+  onDragStart?: (e: React.DragEvent, id: string) => void;
+  onDragOver?: (e: React.DragEvent) => void;
+  onDrop?: (e: React.DragEvent, id: string) => void;
 }
 
 /**
  * Scene - Represents a single scene in the movie editor
- * Provides functionality for displaying, editing, and regenerating scenes
+ * Provides functionality for displaying, editing, regenerating, and deleting scenes
  */
 export const Scene: React.FC<SceneProps> = ({
   id,
@@ -24,7 +30,12 @@ export const Scene: React.FC<SceneProps> = ({
   referenceImages = [],
   position = { x: 0, y: 0 },
   onEdit,
-  onRegenerate
+  onRegenerate,
+  onDelete,
+  draggable = false,
+  onDragStart,
+  onDragOver,
+  onDrop
 }) => {
   const [editedPrompt, setEditedPrompt] = useState(prompt);
   const [open, setOpen] = useState(false);
@@ -44,9 +55,53 @@ export const Scene: React.FC<SceneProps> = ({
     }
   };
 
+  // Handle scene deletion
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete(id);
+    }
+  };
+
+  // Handle drag events
+  const handleDragStart = (e: React.DragEvent) => {
+    if (onDragStart && draggable) {
+      onDragStart(e, id);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    if (onDragOver) {
+      onDragOver(e);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    if (onDrop) {
+      onDrop(e, id);
+    }
+  };
+
   return (
-    <Card className="w-[400px] h-[300px] absolute shadow-lg overflow-hidden"
-          style={{ left: `${position.x}px`, top: `${position.y}px` }}>
+    <Card 
+      className="w-[400px] h-[300px] absolute shadow-lg overflow-hidden group"
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
+      draggable={draggable}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
+      {/* Delete Button - Visible on hover */}
+      {onDelete && (
+        <button 
+          className="absolute top-2 right-2 bg-black/70 text-white rounded-full p-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+          onClick={handleDelete}
+          title="Delete scene"
+        >
+          <X size={16} />
+        </button>
+      )}
+
       {/* Scene Image */}
       <div className="relative w-full h-[200px] bg-slate-300 overflow-hidden">
         {imageUrl ? (
